@@ -6,6 +6,9 @@ echo std > /sys/devices/pci0000:00/0000:00:08.0/i2c_dw_sysnode/mode
 # start bluetooth
 /root/carputer/bluetooth.sh &
 
+# start the UI
+/usr/bin/python /root/ha/haTacoma.py &
+
 # mount the data drive
 #/root/carputer/mountdata.sh
 
@@ -18,5 +21,4 @@ echo std > /sys/devices/pci0000:00/0000:00:08.0/i2c_dw_sysnode/mode
 # start the rest of the services
 /usr/bin/python /root/carputer/diags.py &
 /usr/bin/python /root/carputer/9dof.py &
-/usr/bin/python /root/ha/haTacoma.py &
 
