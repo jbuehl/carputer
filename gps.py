@@ -9,6 +9,7 @@ stateDir = rootDir
 logFileName = "gps.csv"
 stateFileName = "gps.json"
 gpsDevice = "/dev/ttyUSB0"
+minSpeed = 2        # ignore speed less than this value
 
 nSats = 0
 dateStamp = "000000"
@@ -53,7 +54,7 @@ def parseAltitude(altStr):
     return str2float(altStr)*3.28084
 
 def parseSpeed(speedStr):
-    return (0.0 if str2float(speedStr) < 5 else str2float(speedStr)*1.15078)
+    return (0.0 if str2float(speedStr) < minSpeed else str2float(speedStr)*1.15078)
 
 def parseHeading(trackStr):
     return str2float(trackStr)
@@ -106,7 +107,8 @@ while True:
             now = curTime(dateStamp, timeStamp, now)
             position = parsePosition(latStr, latDir, longStr, longDir)
             speed = parseSpeed(speedStr)
-            heading = parseHeading(trackStr)
+            if speed > 0:   # retain last heading if stopped
+                heading = parseHeading(trackStr)
         except:
             pass
     elif gpsMsg[0] == "$GPVTG":
