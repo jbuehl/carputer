@@ -1,0 +1,8 @@
+[Unit]
+Description=GPS service
+After=local-fs.target
+[Service]
+ExecStart=/usr/bin/python /root/carputer/gps.py
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target

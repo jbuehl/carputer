@@ -1,0 +1,8 @@
+[Unit]
+Description=Diagnostics service
+After=multi-user.target
+[Service]
+ExecStart=/usr/bin/python /root/carputer/diags.py
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
