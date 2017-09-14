@@ -5,9 +5,9 @@ import struct
 import time
 
 debugMsg = False
-debugPids = True
-debugData = True
-debugDtc = True
+debugPids = False
+debugData = False
+debugDtc = False
 
 diagDevice = "/dev/ttyUSB1"
 diagBaud = 9600
@@ -16,6 +16,7 @@ logDir = rootDir+"diags/"
 stateDir = rootDir
 logFileName = "diags.json"
 stateFileName = stateDir+"diags.json"
+waitTime = 0
 
 diagState = {"Battery": 0.0,
              "Rpm": 0, 
@@ -23,8 +24,10 @@ diagState = {"Battery": 0.0,
              "Barometer": 0.0,
              "AirTemp": 0,
              "RunTime": 0,
+             "NCodes":, 0,
              "DiagCodes": "",
              }
+             
 # send a request message to the specified port
 def sendMsg(port, msg):
     if debugMsg: print msg
@@ -86,7 +89,7 @@ def readDiagData(port):
     for dtcPtr in range(0, len(response), 2):
         if response[dtcPtr:dtcPtr+2] != "\x00\x00": 
             dtcList += parseDtc(response[dtcPtr]))+" "
-    return dtcList[:-1]
+    return (nCodes, dtcList[:-1])
 
 # parse a DTC
 #
@@ -168,12 +171,14 @@ pids = [readPidData(diagPort, 1, 0x00),
         ]
 if debugPids: print "pids:", "%08x "*len(pids) % tuple(pids)
 
-diagState["DiagCodes"] = readDiagData(diagPort)
 diagState["Vin"] = readPidData(diagPort, 9, 0x02)
 
 # read vehicle data
 while True:
     diagState["Battery"] = readBattery(diagPort)
+    (nCodes, diagCodes) = readDiagData(diagPort)
+    diagState["NCodes"] = nCodes
+    diagState["DiagCodes"] = diagCodes
     diagState["WaterTemp"] = readPidData(diagPort, 1, 0x05) - 40
     diagState["Rpm"] = readPidData(diagPort, 1, 0x0c) / 4
     diagState["Speed"] = readPidData(diagPort, 1, 0x0d) * 0.621371
@@ -183,6 +188,6 @@ while True:
     
     writeState(stateFileName, diagState)
     writeLog(logFile, diagState)
-    time.sleep(1)
+    time.sleep(waitTime)
     
 
