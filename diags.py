@@ -24,8 +24,8 @@ diagState = {"Battery": 0.0,
              "Barometer": 0.0,
              "AirTemp": 0,
              "RunTime": 0,
-             "NCodes":, 0,
-             "DiagCodes": "",
+             "NCodes": 0,
+             "DiagCodes": "0",
              }
              
 # send a request message to the specified port
@@ -81,14 +81,16 @@ def readPidData(port, mode, pid):
 # return diagnostic data (mode 3)
 def readDiagData(port):
     response = readObdData(port, 1, 0x01).decode("hex")
+#    response = "\x82\x07\x65\x00"
     checkEngine = ord(response[0])>>7 & 0x01
     nCodes = ord(response[0]) & 0x7f
     if debugDtc: print "checkEngine:", checkEngine, "nCodes:", nCodes
     response = readObdData(port, 3).decode("hex")
-    dtcList = " "
+#    response = "\x00\x01\x80\x03"
+    dtcList = str(nCodes)+" "
     for dtcPtr in range(0, len(response), 2):
         if response[dtcPtr:dtcPtr+2] != "\x00\x00": 
-            dtcList += parseDtc(response[dtcPtr]))+" "
+            dtcList += parseDtc(response[dtcPtr:dtcPtr+2])+" "
     return (nCodes, dtcList[:-1])
 
 # parse a DTC
