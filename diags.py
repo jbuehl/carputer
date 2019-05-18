@@ -9,7 +9,7 @@ debugPids = False
 debugData = False
 debugDtc = False
 
-diagDevice = "/dev/ttyUSB1"
+diagDevice = "/dev/ttyUSB0"
 diagBaud = 9600
 rootDir = "/root/data/"
 logDir = rootDir+"diags/"
@@ -19,7 +19,7 @@ stateFileName = stateDir+"diags.json"
 waitTime = 0
 
 diagState = {"Battery": 0.0,
-             "Rpm": 0, 
+             "Rpm": 0,
              "WaterTemp": 0,
              "Barometer": 0.0,
              "AirTemp": 0,
@@ -27,14 +27,14 @@ diagState = {"Battery": 0.0,
              "NCodes": 0,
              "DiagCodes": "0",
              }
-             
+
 # send a request message to the specified port
 def sendMsg(port, msg):
     if debugMsg: print msg
     port.write(msg+"\r")
 
 # read bytes from the specified port until a ">" prompt is received
-# return the list of message lines that were received    
+# return the list of message lines that were received
 def readMsgs(port):
     ch = ""
     msg = ""
@@ -49,7 +49,7 @@ def readMsgs(port):
 def readMsg(port):
     return readMsgs(port)[-3]
 
-# return the OBD-II data for the specified mode and pid   
+# return the OBD-II data for the specified mode and pid
 def readObdData(port, mode, pid=None):
     request = "%02x" % mode
     if pid:
@@ -89,7 +89,7 @@ def readDiagData(port):
 #    response = "\x00\x01\x80\x03"
     dtcList = str(nCodes)+" "
     for dtcPtr in range(0, len(response), 2):
-        if response[dtcPtr:dtcPtr+2] != "\x00\x00": 
+        if response[dtcPtr:dtcPtr+2] != "\x00\x00":
             dtcList += parseDtc(response[dtcPtr:dtcPtr+2])+" "
     return (nCodes, dtcList[:-1])
 
@@ -104,7 +104,7 @@ def parseDtc(msg):
     code += hex(ord(msg[1]) & 0x0f)[-1]
     if debugDtc: print "dtc:", code.upper()
     return code.upper()
-    
+
 # clear diagnostic data (mode 4)
 def clearDiagData(port):
     response = readObdData(port, 4)
@@ -117,12 +117,12 @@ def readBattery(port):
     return float(msg.rstrip("V"))
 
 # update the state file
-def writeState(stateFileName, diagState):        
+def writeState(stateFileName, diagState):
     with open(stateFileName, "w") as diagFile:
         diagFile.write(json.dumps(diagState))
 
 # write to the log file
-def writeLog(logFile, diagState):        
+def writeLog(logFile, diagState):
     logFile.write(json.dumps(diagState))
     logFile.flush()
 
@@ -156,11 +156,11 @@ msg = readMsg(diagPort)
 # BF9FA8939105B11FFADC2000
 #
 # Supported PIDs:
-# 00,     02,     04, 05, 06, 07, 08, 09,         0c, 0d, 0e, 0f, 
+# 00,     02,     04, 05, 06, 07, 08, 09,         0c, 0d, 0e, 0f,
 # 10, 11,     13,     15,             19,         1c,         1f,
-# 20, 21,                         28,                     2e,     
+# 20, 21,                         28,                     2e,
 # 30, 31,     33, 34,             38,             3c, 3d, 3e, 3f,
-# 40, 41, 42, 43, 44, 45,     47,     49, 4a,     4c, 4d, 4e,    
+# 40, 41, 42, 43, 44, 45,     47,     49, 4a,     4c, 4d, 4e,
 #             53
 
 pids = [readPidData(diagPort, 1, 0x00),
@@ -187,9 +187,7 @@ while True:
     diagState["IntakeTemp"] = readPidData(diagPort, 1, 0x0f) - 40
     diagState["RunTime"] = readPidData(diagPort, 1, 0x1f)
     diagState["Barometer"] = readPidData(diagPort, 1, 0x33) * 0.2953
-    
+
     writeState(stateFileName, diagState)
     writeLog(logFile, diagState)
     time.sleep(waitTime)
-    
-

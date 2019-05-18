@@ -3,6 +3,7 @@ Description=GPS service
 After=local-fs.target
 [Service]
 ExecStart=/usr/bin/python /root/carputer/gps.py
-Restart=on-abort
+ExecStartPre=/bin/stty -F /dev/serial0 raw 9600 cs8 clocal -cstopb
+Restart=always
 [Install]
 WantedBy=multi-user.target

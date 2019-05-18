@@ -1,6 +1,6 @@
 # Car computer
 
-Software for a car computer (carputer) based on the Intel Edison.
+Software for a car computer (carputer) based on the Raspberry Pi.  This is installed in my 2012 Toyota Tacoma Prerunner.
 
 ## Functions
 

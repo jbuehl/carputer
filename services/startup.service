@@ -1,8 +1,0 @@
-[Unit]
-Description=Carputer startup
-After=multi-user.target
-[Service]
-ExecStart=/root/carputer/startup.sh
-Restart=on-abort
-[Install]
-WantedBy=multi-user.target
