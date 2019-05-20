@@ -10,6 +10,14 @@ The software in this project consists of two applications that collect GPS and v
 
 ## Functions
 
+### Time
+
+The real time clock on the GPS board provides the current time immediately at startup and that is used to set the system time since there may not be a network connection to get it from a time server.  As soon as satellites are acquired the GPS time is used to update the RTC.  The system time is maintained as UTC.  The time and date that is displayed on the UI is converted to the local time zone that the vehicle is in based on the latitude and longitude reported by the GPS.
+
+### Temperature
+
+My vehicle can have an optional outside temperature sensor, but it is not installed.  I mounted an I2C temperature sensor in front of the radiator and interfaced it to the Raspberry Pi using a CAT5 cable.  The TC74 sensor only has a resolution of 1 degree C.  A better choice would be a DS18B20 which uses the 1-wire interface.
+
 ### GPS
 
 The GPS data displayed is
@@ -22,13 +30,13 @@ The GPS data displayed is
 - elevation
 - number of satellites
 
-The real time clock on the GPS board provides the current time immediately at startup and that is used to set the system time since there may not be a network connection to get it from a time server.  As soon as satellites are acquired the GPS time is used to update the RTC.  The time is stored as UTC.  The time that is displayed on the UI is converted to the time zone that the vehicle is in based on the latitude and longitude.  Speed, heading, and elevation are provided from GPS data.  Because I had some issues with accuracy of the elevation with this GPS unit, the elevation is also calculated from the latitude and longitude using the Shuttle Radar Topography Mission data.  A button on the UI allows selection of this.  The number of satellites gives an indication of the quality of the GPS data.  
+Speed, heading, and elevation are provided from GPS data.  Because I had some issues with accuracy of the elevation with this GPS unit, the elevation is also calculated from the latitude and longitude using the Shuttle Radar Topography Mission data.  A button on the UI allows selection of this.  The number of satellites gives an indication of the quality of the GPS data.  
 
 ### Vehicle diagnostics
 
 Vehicle diagnostic data is acquired from the CAN bus via the OBD-II connector.  This is interfaced through the UART board and serial to USB adapter.  The data displayed is
 
-- engine RPMs
+- engine RPM
 - battery voltage
 - intake air temperature
 - coolant temperature
@@ -39,17 +47,13 @@ There would have been a lot of other interesting metrics, but they aren't availa
 
 The display toggles between GPS and diagnostic data.
 
-### Temperature
-
-My vehicle can have an optional outside temperature sensor, but it is not installed.  I mounted an I2C temperature sensor in front of the radiator and interfaced it to the Raspberry Pi using a CAT5 cable.
-
 ### Dash camera
 
-The 5MP Raspberry Pi camera module is mounted in a small enclosure that is attached to the top of the carputer case.  It connects with a ribbon cable.  A window on the display constantly shows the real time image that the camera sees.  Buttons on the user interface allow capturing a still image, starting/stopping recording of video, or changing the speed of the recorded video.  Still images and videos are stored on the RaspberryPi SD card.
+The 8MP Raspberry Pi camera module is mounted in a small enclosure that is attached to the top of the carputer case.  It connects with a ribbon cable.  A window on the display constantly shows the real time image that the camera sees.  Buttons on the user interface allow capturing a still image, starting/stopping recording of video, or changing the speed of the recorded video.  Still images and videos are stored on the RaspberryPi SD card.
 
 ### Network functions
 
-The Raspberry Pi has wifi capability.  One or more networks can be configured and it will attempt to connect to any of them that are in range.  When connected, the SSID of the network and the IP address it provided are displayed.  A button on the user interface allows the wifi to be turned on and off.  Another button initiates the upload of all the data (gps, diagnostics, images, videos) to a server.
+The Raspberry Pi has wifi capability.  One or more networks can be configured and it will attempt to connect to any of them that are in range.  When connected, the SSID of the network and the IP address it provided are displayed.  A button on the user interface allows the wifi to be turned on and off.  Another button initiates the upload of all the data (GPS, diagnostics, images, videos) to a server.
 
 ## Hardware
 
@@ -69,4 +73,6 @@ More details about the hardware coming.
 ## Software
 
 ### Raspbian - https://www.raspberrypi.org/downloads/raspbian/
-### My Home Automation project - https://github.com/jbuehl/ha
+### gps.py
+### diags.py
+### carApp.py - https://github.com/jbuehl/ha
