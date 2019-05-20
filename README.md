@@ -2,9 +2,9 @@
 
 Software for a car computer (carputer) based on the Raspberry Pi.  This is installed in my 2008 Toyota Tacoma Prerunner.
 
-This represents my third carputer I have built over about 15 years.  Functions such as entertainment and navigation are better handled by commercially available units so I'm not attempting to do that any more.  I have an Alpine ILX-107 with wireless CarPlay that does this as well as providing a backup camera.  This project implements some additional functions on a second screen that aren't readily available on the Alpine.
+This is the third carputer I have built over a period of about 15 years.  At first I tried to implement everything, but over time I realized that functions such as entertainment and navigation are better handled by commercially available units so I'm not attempting to do that any more.  I have an Alpine ILX-107 with wireless CarPlay connected to my iPhone that does these things as well as providing a backup camera.  For music I like to use Spotify or SiriusXM and for navigation I prefer Google Maps.  With this project I am focusing on some additional functions on a second screen that aren't readily available on the Alpine.
 
-The software in this project consists of two applications that collect GPS and vehicle diagnostic data.  Both types of data are continuously logged to flat files.  The current values of each type are also written to JSON files which form the interface to the user interface application contained in the jbuehl/ha project.  That application, carApp.py, reads the GPS and diagnostic data from the JSON files, interfaces to the temperature sensor and camera module, and presents the user interface on the LCD touchscreen.
+The software in this project consists of two applications that collect GPS and vehicle diagnostic data.  Both types of data are continuously logged to files.  The current values of each type are also written to files which are monitored by the user interface application contained in the jbuehl/ha project.  That application reads the GPS and diagnostic data from the current files, interfaces to the temperature sensor and camera module, and presents the user interface on the LCD touchscreen.
 
 ![photo](docs/IMG_6727.JPG)
 
@@ -22,7 +22,6 @@ My vehicle can have an optional outside temperature sensor, but it is not instal
 
 The GPS data displayed is
 
-- time
 - speed
 - heading
 - latitude
@@ -45,7 +44,7 @@ Vehicle diagnostic data is acquired from the CAN bus via the OBD-II connector.  
 
 There would have been a lot of other interesting metrics, but they aren't available in the standard OBD data that my vehicle provides.
 
-The display toggles between GPS and diagnostic data.
+The display can be toggled between GPS and diagnostic data.
 
 ### Dash camera
 
@@ -75,4 +74,4 @@ More details about the hardware coming.
 ### Raspbian - https://www.raspberrypi.org/downloads/raspbian/
 ### gps.py
 ### diags.py
-### carApp.py - https://github.com/jbuehl/ha
+### carApp.py - https://github.com/jbuehl/ha/blob/master/carApp.py
