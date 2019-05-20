@@ -6,7 +6,7 @@ This represents my third carputer I have built over about 15 years.  Functions s
 
 The software in this project consists of two applications that collect GPS and vehicle diagnostic data.  Both types of data are continuously logged to flat files.  The current values of each type are also written to JSON files which form the interface to the user interface application contained in the jbuehl/ha project.  That application, carApp.py, reads the GPS and diagnostic data from the JSON files, interfaces to the temperature sensor and camera module, and presents the user interface on the LCD touchscreen.
 
-[photo](docs/IMG_6727.JPG)
+![photo](docs/IMG_6727.JPG)
 
 ## Functions
 
