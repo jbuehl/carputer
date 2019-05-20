@@ -6,6 +6,8 @@ This represents my third carputer I have built over about 15 years.  Functions s
 
 The software in this project consists of two applications that collect GPS and vehicle diagnostic data.  Both types of data are continuously logged to flat files.  The current values of each type are also written to JSON files which form the interface to the user interface application contained in the jbuehl/ha project.  That application, carApp.py, reads the GPS and diagnostic data from the JSON files, interfaces to the temperature sensor and camera module, and presents the user interface on the LCD touchscreen.
 
+[photo](docs/IMG_6727.JPG)
+
 ## Functions
 
 ### GPS
@@ -50,6 +52,8 @@ The 5MP Raspberry Pi camera module is mounted in a small enclosure that is attac
 The Raspberry Pi has wifi capability.  One or more networks can be configured and it will attempt to connect to any of them that are in range.  When connected, the SSID of the network and the IP address it provided are displayed.  A button on the user interface allows the wifi to be turned on and off.  Another button initiates the upload of all the data (gps, diagnostics, images, videos) to a server.
 
 ## Hardware
+
+More details about the hardware coming.
 
 ### Raspberry Pi 3 B+ - https://www.sparkfun.com/products/14643
 ### LCD touchscreen - https://www.sparkfun.com/products/13733
