@@ -6,7 +6,7 @@ This is the third carputer I have built over a period of about 15 years.  At fir
 
 The software in this project consists of two applications that collect GPS and vehicle diagnostic data.  Both types of data are continuously logged to files.  The current values of each type are also written to files which are monitored by the user interface application contained in the jbuehl/ha project.  That application reads the GPS and diagnostic data from the current files, interfaces to the temperature sensor and camera module, and presents the user interface on the LCD touchscreen.
 
-![photo](docs/IMG_6727.JPG)
+![photo](docs/IMG_6732.JPG)
 
 ## Functions
 
