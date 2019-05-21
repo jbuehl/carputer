@@ -8,6 +8,8 @@ The software in this project consists of two applications that collect GPS and v
 
 ![photo](docs/IMG_6732.JPG)
 
+The Alpine unit is mounted in the dash and the carputer is attached to the bezel with an aluminum bracket that I fabricated.  The camera is mounted on the top of the Raspberry Pi case.
+
 ## Functions
 
 ### Time
@@ -52,11 +54,11 @@ The 8MP Raspberry Pi camera module is mounted in a small enclosure that is attac
 
 ### Network functions
 
-The Raspberry Pi has wifi capability.  One or more networks can be configured and it will attempt to connect to any of them that are in range.  When connected, the SSID of the network and the IP address it provided are displayed.  A button on the user interface allows the wifi to be turned on and off.  Another button initiates the upload of all the data (GPS, diagnostics, images, videos) to a server.
+The Raspberry Pi has wifi capability.  One or more networks can be configured and it will attempt to connect to whichever one of them is in range.  When connected, the SSID of the network and the IP address it provided are displayed.  A button on the user interface allows the wifi to be turned on and off.  Another button initiates the upload of all the data (GPS, diagnostics, images, videos) to a server.
 
 ## Hardware
 
-More details about the hardware coming.
+More details and photos about the hardware coming soon.
 
 ### Raspberry Pi 3 B+ - https://www.sparkfun.com/products/14643
 ### LCD touchscreen - https://www.sparkfun.com/products/13733
