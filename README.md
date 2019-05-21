@@ -61,15 +61,42 @@ The Raspberry Pi has wifi capability.  One or more networks can be configured an
 More details and photos about the hardware coming soon.
 
 ### Raspberry Pi 3 B+ - https://www.sparkfun.com/products/14643
+
+You can either use a 3 B or B+.
+
 ### LCD touchscreen - https://www.sparkfun.com/products/13733
+
+This connects to the Raspberry Pi with a ribbon cable.  Power is supplied by jumpers that I connected to the GPS board.
+
 ### Camera module - https://www.sparkfun.com/products/14028
+
+Can be either the V1 or V2 camera.
+
 ### GPS module and RTC - https://www.adafruit.com/product/2324
+
+This is a nice kit that provides the GPS module, a real time clock, and breakouts for all the Raspberry Pi pins.  Battery not included.
+
 ### GPS antenna and adapter - https://www.amazon.com/gp/product/B00JE4GV8S https://www.amazon.com/gp/product/B01AJQ33Y4
-### OBD-II UART and USB adapter - https://www.sparkfun.com/products/9555 https://www.sparkfun.com/products/9716
+
+Having an external antenna is necessary if you have the camera module because the camera ribbon cable emits a lot of noise that prevents the GPS from working.
+
+### OBD-II UART, OBD-II cable, and USB adapter - https://www.sparkfun.com/products/9555 https://www.sparkfun.com/products/10087 https://www.sparkfun.com/products/9716
+
+I have these mounted in a separate plastic enclosure under the dash with a mini USB cable that connects to the Raspberry Pi.
+
 ### Temperature sensor - http://ww1.microchip.com/downloads/en/devicedoc/21462d.pdf
+
+This is a temperature sensor that I happened to have in the parts bin.
+
 ### Voltage converter - https://www.amazon.com/GEREE-Waterproof-Converter-Adapter-Connector/dp/B00OXZ06I4
+
+This is wired to the 12v line that is switched by the ignition.  There are two USB connectors that supply 5v.  One powers the carputer and I use the other one to charge my phone.
+
 ### Case - https://www.amazon.com/Raspberry-Pi-7-Inch-Touch-Screen/dp/B01GQFUWIC
 ### Camera case - https://www.amazon.com/gp/product/B00IJZOT5A
+
+This is a horrible little case that required a lot of modification to make it work, but I couldn't find another one that would work.
+Read my Amazon review for details on the problems that I had https://www.amazon.com/gp/customer-reviews/R3LHYJAJY1Q1UC/ref=cm_cr_arp_d_rvw_ttl?ie=UTF8&ASIN=B00IJZOT5A.
 
 ## Software
 
