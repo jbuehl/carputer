@@ -52,7 +52,7 @@ def curTime(dateStamp, timeStamp, now):
 
 # set the system time
 def setTime(now):
-    if debug: print "Setting system time"
+    if debug: print("Setting system time")
     os.system('date -s "'+time.asctime(now)+'"')
 
 # data parsing routines
@@ -87,7 +87,7 @@ def parseGGA(gpsMsg):
             altitude = getElevation(latitude, longitude, gpsAltitude)
     except:
         if debug:
-            print gpsMsg
+            print(gpsMsg)
             if haltOnError: raise
 
 def parseRMC(gpsMsg):
@@ -101,7 +101,7 @@ def parseRMC(gpsMsg):
                 heading = parseHeading(trackStr)
     except:
         if debug:
-            print gpsMsg
+            print(gpsMsg)
             if haltOnError: raise
 
 def parseZDA(gpsMsg):
@@ -111,7 +111,7 @@ def parseZDA(gpsMsg):
         if timeStamp != "": now = curTime(day+month+year[2:], timeStamp, now)
     except:
         if debug:
-            print gpsMsg
+            print(gpsMsg)
             if haltOnError: raise
 
 # convert a NMEA location value ddmm.mmmm to degrees dd.dddddd
@@ -150,13 +150,13 @@ def parseState(state):
         if haltOnError: raise
 
 def readState():
-    if debug: print "reading state from", stateDir+stateFileName
+    if debug: print("reading state from", stateDir+stateFileName)
     try:
         with open(stateDir+stateFileName) as stateFile:
             parseState(json.load(stateFile))
     except:
         if haltOnError: raise
-    if debug: print formatPrint()
+    if debug: print(formatPrint())
 
 def formatState():
     return json.dumps({"Time": formatTime(now),
@@ -165,7 +165,7 @@ def formatState():
                        "GPSDevice": gpsDevice})
 
 def writeState():
-    if debug: print "writing state to", stateDir+stateFileName
+    if debug: print("writing state to", stateDir+stateFileName)
     with open(stateDir+stateFileName, "w") as stateFile:
         stateFile.write(formatState())
 
@@ -175,13 +175,13 @@ if __name__ == "__main__":
         for device in gpsDevices:
             try:
                 inFile = open(device)
-                if debug: print "opened gps device", device
+                if debug: print("opened gps device", device)
                 gpsDevice = device[5:]
                 break
             except IOError:
-                if debug: print "error opening gps device", device
+                if debug: print("error opening gps device", device)
         if not inFile:
-            if debug: print "waiting for gps device"
+            if debug: print("waiting for gps device")
             time.sleep(1)
 
     # read the last known state
@@ -192,7 +192,7 @@ if __name__ == "__main__":
         inMsg = inFile.readline()
         if False:
             if len(inMsg) > 1:
-                print len(inMsg), inMsg,
+                print(len(inMsg), inMsg, end=' ')
 
         # write to the log file if it is open which occurs after the time has been acquired
         if logFile:
@@ -218,10 +218,10 @@ if __name__ == "__main__":
             parseZDA(gpsMsg)
         else:
             if gpsMsg[0] != "":
-                if debug: print "unknown gps message", gpsMsg[0]
+                if debug: print("unknown gps message", gpsMsg[0])
 
         if now != lastTime: # do this once per second
-            if debug: print formatPrint()
+            if debug: print(formatPrint())
             lastTime = now
             if now[0] > 2000:   # don't write anything until valid time has been acquired
                 if first or (now[5] == 0): # set system time initially, then once per minute
@@ -230,10 +230,10 @@ if __name__ == "__main__":
                     first = False
                 if not logFile: # open a new log file if it hasn't happened yet
                     logFileName = logDir+time.strftime('%Y%m%d%H%M%S', now)+"-"+logFileBaseName
-                    if debug: print "opening log file", logFileName
+                    if debug: print("opening log file", logFileName)
                     logFile = open(logFileName, "w")
                 if logFile:
                     # if (nSats >= minSats) and (latitude != 0.0):   # update the state file if we have acquired enough satellites
                         writeState()
             else:
-                if debug: print "waiting for date", now[0]
+                if debug: print("waiting for date", now[0])
