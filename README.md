@@ -93,6 +93,9 @@ This is a temperature sensor that I happened to have in the parts bin.
 This is wired to the 12v line that is switched by the ignition.  There are two USB connectors that supply 5v.  One powers the carputer and I use the other one to charge my phone.
 
 ### Case - https://www.amazon.com/Raspberry-Pi-7-Inch-Touch-Screen/dp/B01GQFUWIC
+
+A very nice case.  I have it mounted upside down for a couple of reasons.
+
 ### Camera case - https://www.amazon.com/gp/product/B00IJZOT5A
 
 This is a horrible little case that required a lot of modification to make it work, but I couldn't find another one that would work.
