@@ -70,7 +70,7 @@ View from the back of the case showing the 4 screws that mount the Pi case to th
 
 ![photo](docs/IMG_7625.JPG)
 
-Close up of the GPS module and RTC board.  This board plugs into the 40 pin connector of the Raspberry Pi beneath it.  The Pi is mounted above the LCD display board that mounts to the case.  The red and black wires at the top right corner connect +5v and GND to the LCD display board beneath the Raspberry Pi.  Both that board and the Pi have micro USB connectors that are exposed so if they are connected together, only one or the other needs to be powered assuming the power supply has enough capacity.  Four conductors of the gray CAT-5 cable are connected to +3.3v, GND, SDA, and SCL on the board.  The white ribbon cable goes from the camera, through a slot in the GPS board, and on to the camera connector on the Raspberry Pi.  The short GPS antenna adapter connects from the U.FL connector on the board to a coax connector mounted in the left side of the case.  The other white ribbon cable just visible at the left side of the board goes to the display board.
+Close up of the GPS module and RTC board.  This board plugs into the 40 pin connector of the Raspberry Pi beneath it.  The Pi is mounted above the LCD display board that mounts to the case.  The red and black wires at the top right corner connect +5v and GND to the LCD display board beneath the Raspberry Pi.  Both that board and the Pi have micro USB connectors that are exposed through the case so if power lines of the boards are connected together internally, only one or the other needs to be powered from a USB connector assuming the power supply has enough capacity.  Four conductors of the gray CAT-5 cable are connected to +3.3v, GND, SDA, and SCL on the board.  The white ribbon cable goes from the camera, through a slot in the GPS board, and on to the camera connector on the Raspberry Pi.  The short GPS antenna adapter connects from the U.FL connector on the board to a coax connector mounted in the left side of the case.  The other white ribbon cable just visible at the left side of the board goes to the display board.
 
 ### Raspberry Pi 3B+ - https://www.sparkfun.com/products/14643
 
@@ -86,7 +86,7 @@ Can be either the V1 or V2 camera.
 
 ### GPS module and RTC - https://www.adafruit.com/product/2324
 
-This is a nice kit that provides the GPS module, a real time clock, and breakouts for all the Raspberry Pi pins.  Battery not included.
+This is a nice kit that provides the GPS module, a real time clock, and breakouts for all the Raspberry Pi pins.  A CR1220 battery is required but not included.
 
 ### GPS antenna and adapter - https://www.amazon.com/gp/product/B00JE4GV8S https://www.amazon.com/gp/product/B01AJQ33Y4
 
