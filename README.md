@@ -4,11 +4,11 @@ Software for a car computer (carputer) based on the Raspberry Pi.  This is insta
 
 This is the third carputer I have built over a period of about 15 years.  At first I tried to implement everything, but over time I realized that functions such as entertainment and navigation are better handled by commercially available units so I'm not attempting to do that any more.  I have an Alpine ILX-107 with wireless CarPlay connected to my iPhone that does these things as well as providing a backup camera.  For music I like to use Spotify or SiriusXM and for navigation I prefer Google Maps.  With this project I am focusing on some additional functions on a second screen that aren't readily available on the Alpine.
 
-The software in this project consists of two applications that collect GPS and vehicle diagnostic data.  Both types of data are continuously logged to files.  The current values of each type are also written to files which are monitored by the user interface application contained in the jbuehl/ha project.  That application reads the GPS and diagnostic data from the current files, interfaces to the temperature sensor and camera module, and presents the user interface on the LCD touchscreen.
+The software in this project consists of two applications that collect GPS and vehicle diagnostic data.  Both types of data are continuously logged to files.  The current values of each type are also written to files which are monitored by the user interface application contained in the https://github.com/jbuehl/ha project.  That application reads the GPS and diagnostic data from the current files, interfaces to the temperature sensor and camera module, and presents the user interface on the LCD touchscreen.
 
 ![photo](docs/IMG_6732.JPG)
 
-The Alpine unit is mounted in the dash and the carputer is attached to the bezel with an aluminum bracket that I fabricated.  The camera is mounted on the top of the Raspberry Pi case.
+The Alpine unit is mounted in the dash and the carputer is attached to the bezel with an aluminum bracket that I fabricated.  The camera is mounted on the top of the Raspberry Pi case with double sided tape.
 
 ## Functions
 
@@ -58,11 +58,21 @@ The Raspberry Pi has wifi capability.  One or more networks can be configured an
 
 ## Hardware
 
-More details and photos about the hardware coming soon.
+This photo shows how the Raspberry Pi case is mounted on the dashboard adapter.  I fabricated a U shaped bracket from a piece of 1/16" aluminum which is bolted to the plastic dashboard adapter and the case is attached to that.  The camera case is attached to the top of the Pi case and points to the front of the vehicle.  The display case is mounted upside down so that the micro USB power connectors are on the bottom and also to provide a flat surface to mount the camera at the top.  The image is easily inverted by making a change to a startup configuration file.
 
-### Raspberry Pi 3 B+ - https://www.sparkfun.com/products/14643
+![photo](docs/IMG_7633.JPG)
 
-You can either use a 3 B or B+.
+View from the back of the case showing the 4 screws that mount the Pi case to the arms of the bracket.  I made a notch in the bracket and the dashboard adapter to allow the cables to pass through.  The cable supplying power connects to the micro USB connector of the Raspberry Pi.  The other USB cable with the right angle connector is plugged into a USB port and connects to the OBD-II adapter.  The gray cable is a CAT-5 cable that connects the temperature sensor to the I2C interface.  Not shown is the coax cable from the GPS antenna that connects to the gold connector on the left side of the case.
+
+![photo](docs/IMG_7624.JPG)
+
+Close up of the GPS module and RTC board.  This board plugs into the 40 pin connector of the Raspberry Pi beneath it.  The Pi is mounted above the LCD display board that mounts to the case.  The red and black wires at the top right corner connect +5v and GND to the LCD display board beneath the Raspberry Pi.  Both that board and the Pi have micro USB connectors that are exposed so if they are connected together, only one or the other needs to be powered assuming the power supply has enough capacity.  Four conductors of the gray CAT-5 cable are connected to +3.3v, GND, SDA, and SCL on the board.  The white ribbon cable goes from the camera, through a slot in the GPS board, and on to the camera connector on the Raspberry Pi.  The short GPS antenna adapter connects from the U.FL connector on the board to a coax connector mounted in the left side of the case.  The other white ribbon cable just visible at the left side of the board goes to the display board.
+
+![photo](docs/IMG_7625.JPG)
+
+### Raspberry Pi 3B+ - https://www.sparkfun.com/products/14643
+
+You can either use a 3B or 3B+.
 
 ### LCD touchscreen - https://www.sparkfun.com/products/13733
 
@@ -78,7 +88,7 @@ This is a nice kit that provides the GPS module, a real time clock, and breakout
 
 ### GPS antenna and adapter - https://www.amazon.com/gp/product/B00JE4GV8S https://www.amazon.com/gp/product/B01AJQ33Y4
 
-Having an external antenna is necessary if you have the camera module because the camera ribbon cable emits a lot of noise that prevents the GPS from working.
+Having an external antenna is necessary if you have the camera module because the camera ribbon cable emits a lot of noise that prevents the GPS from working properly.
 
 ### OBD-II UART, OBD-II cable, and USB adapter - https://www.sparkfun.com/products/9555 https://www.sparkfun.com/products/10087 https://www.sparkfun.com/products/9716
 
@@ -86,7 +96,7 @@ I have these mounted in a separate plastic enclosure under the dash with a mini 
 
 ### Temperature sensor - http://ww1.microchip.com/downloads/en/devicedoc/21462d.pdf
 
-This is a temperature sensor that I happened to have in the parts bin.
+This is a temperature sensor that I happened to have in the parts bin.  Even though it's working for me, I don't recommend using it.  A better choice would be the 1-Wire DS18B20 https://www.amazon.com/Adafruit-Accessories-Waterproof-DS18B20-Digital/dp/B00NAY24KW.
 
 ### Voltage converter - https://www.amazon.com/GEREE-Waterproof-Converter-Adapter-Connector/dp/B00OXZ06I4
 
@@ -98,12 +108,48 @@ A very nice case.  I have it mounted upside down for a couple of reasons.
 
 ### Camera case - https://www.amazon.com/gp/product/B00IJZOT5A
 
-This is a horrible little case that required a lot of modification to make it work, but I couldn't find another one that would work.
-Read my Amazon review for details on the problems that I had https://www.amazon.com/gp/customer-reviews/R3LHYJAJY1Q1UC/ref=cm_cr_arp_d_rvw_ttl?ie=UTF8&ASIN=B00IJZOT5A.
+This is a horrible little case that required a lot of modification to make it work, but I couldn't find a better one.  Read my Amazon review for details on the problems that I had https://www.amazon.com/gp/customer-reviews/R3LHYJAJY1Q1UC/ref=cm_cr_arp_d_rvw_ttl?ie=UTF8&ASIN=B00IJZOT5A.
+
+### Dashboard adapter - https://www.amazon.com/gp/product/B0014KOA42
+
+The carputer is mounted on this aftermarket dash kit that the Alpine unit fits in.  Of course this is specific to my vehicle.
 
 ## Software
 
 ### Raspbian - https://www.raspberrypi.org/downloads/raspbian/
+
+I'm using the Stretch Lite version.  The later Buster version had stability issues so I stuck with Stretch, but that is probably fixed by now.  The Lite version doesn't include the windowing environment which isn't needed which results in a very fast boot time.
+
+To invert the LCD image, the line "lcd_rotate=2" needs to be added to /boot/config.txt.
+
 ### gps.py
+
+This application continuously reads NMEA formatted data from the GPS unit and writes it to two files.  The data is appended without any modification to a log file and is also parsed and selected values are written once per second to another file in JSON format.  The JSON file is overwritten each time so it contains only the most current values.
+
+Once a valid GPS time is acquired, the system clock is set to that value and periodically updated.
+
+The GPS data that is parsed includes the altitude.  Because I had some issues with accuracy of the altitude data with this GPS unit, the altitude is also calculated using the latitude and longitude to look up the value in a table of the Shuttle Radar Topography Mission data.  The format of this data is described here http://fileformats.archiveteam.org/wiki/HGT.  Use of this is optional.  If the application cannot find a file that corresponds to the current latitude and longitude, the GPS altitude is used.  My accuracy issue turned out to be caused by interference emitted from the camera cable and was ultimately resolved with the addition of an external antenna.  The accuracy of SRTM data is about the same as GPS, so if you are getting good GPS data there's really no point in bothering with SRTM.
+
+The GPS app is automatically started as a systemd service upon startup.
+
 ### diags.py
+
+The diagnostics app initializes the OBD-II adapter through the USB serial port, periodically reads data from the CAN bus, and writes it to two files.  Like the GPS data, both a log of individual data points and a file containing just the last set of values are written.
+
+The diagnostics app is automatically started as a systemd service upon startup.
+
 ### carApp.py - https://github.com/jbuehl/ha/blob/master/carApp.py
+
+This application provides the user interface that was described previously.
+
+I chose to use a low level interface to the frame buffer rather than using a windowing environment primarily to reduce the startup time.  The UI is implemented by the DisplayUI module.  The UI is built using a set of classes that I developed that somewhat mimics how a HTML/CSS web UI is built.  The low level interface to the screen is implemented by a small C++ module fb.cpp.
+
+The app is automatically started as a systemd service upon startup.
+
+## Future plans
+
+### 1-Wire temperature sensor
+
+### Front distance detector
+
+To assist in parking.
