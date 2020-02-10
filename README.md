@@ -150,8 +150,6 @@ The app is automatically started as a systemd service upon startup.
 
 ## Future plans
 
-### 1-Wire temperature sensor
-
-### Front distance detector
-
-To assist in parking.
+- 1-Wire temperature sensor
+- Front distance detector to assist in parking
+- Separate from the jbuehl/ha project for simplicity
